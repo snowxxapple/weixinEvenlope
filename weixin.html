@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>微信红包算法实现</title>
+	<!-- 微信红包算法简单实现，并进行了验证 -->
+	<meta charset='utf-8'>
+</head>
+<body id='show'>
+</body>
+<script type="text/javascript">
+	window.onload=function(){
+		var total=10;
+		var num=8;
+		var min=0.01;
+		var sate_total;
+		var money;
+		var test=0;
+		for(var i=1;i<num;i++){
+			safe_total=(total-(num-i)*min)/(num-i);//以平均值作为安全上线可以使得红包值波动较小
+			money=((Math.random()*(safe_total*100)+1)/100).toFixed(2);//toFixed返回值为字符串  NumberObject.toFixed(num)
+			// alert(typeof money);
+			test=test+Number(Number(money).toFixed(2));//Number(object)把对象的值转换为数字，小数形式会完整保留，不会进行四舍五入
+			total=(total-money).toFixed(2);
+			var para=document.createElement('p');//要新创建节点
+			var node=document.createTextNode('第'+i+'个红包；红包金额：'+money+'；余额：'+total);
+			para.appendChild(node);
+			document.getElementById('show').appendChild(para);//JS的appendChild要向已存在的节点添加新节点
+		}
+			var para=document.createElement('p');
+			var node=document.createTextNode('第'+num+'个红包；红包金额：'+total+'；余额：0');
+			para.appendChild(node);
+			document.getElementById('show').appendChild(para);
+			test=test+Number(total);
+			alert(Number(test).toFixed(2));
+	}
+</script>
+</html>
